@@ -1,0 +1,12 @@
+//Arduino C++
+void setup(){
+Serial.begin(9600);
+
+Serial.println("Kirieieiv");
+Serial.println("Dubovskyi");
+Serial.println("Kuznietsov");
+}
+void loop(){
+
+
+}
