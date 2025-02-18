@@ -9,7 +9,7 @@ Kawasaki - Maksim Kirieiev
 Vladosik_Kokosik - Vlad Kuznietsov
 Users:
 -Other
-//Main entities
+//Main entities and their area of ​​work
 Nevermore and his enemies
 Midlane
 //Application capabilities
