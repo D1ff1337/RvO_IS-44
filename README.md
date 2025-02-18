@@ -1,4 +1,4 @@
-//Discription
+//Description
 ZXC - Champions
 //Objective
 Give the best procast ever with Eul's Scepter of Divinity on NEVERMORE
