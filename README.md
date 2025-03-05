@@ -15,4 +15,4 @@ The Octagon
 //Application capabilities
 To play on PC and Android, pause, exit, kill the Ogres, heal yourself, block and evade incoming damage, lose, and die.
 //UI
-Unity UI
+UnityEngine.UI
