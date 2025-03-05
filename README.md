@@ -1,18 +1,18 @@
 //Description
-ZXC - Champions
+RvO (Robot vs Ogres)
 //Objective
-Give the best procast ever with Eul's Scepter of Divinity on NEVERMORE
+Defend ur throne from all of the Ogre waves
 //Users
 Admins: 
-11Zetix47 - Kyrylo Dubovskyi
+11ZetiX47 - Kyrylo Dubovskyi
 Kawasaki - Maksim Kirieiev
 Vladosik_Kokosik - Vlad Kuznietsov
 Users:
--Other
+Player
 //Main entities and their area of ​​work
-Nevermore and his enemies
-Midlane
+Vasiliy; Ogres.
+The Octagon
 //Application capabilities
-Outplay the enemy team and destroy their throne
-//GUI
-DotA Allstars Ultimates
+To play on PC and Android, pause, exit, kill the Ogres, heal yourself, block and evade incoming damage, lose, and die.
+//UI
+Unity UI
