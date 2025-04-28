@@ -1,0 +1,32 @@
+{
+    "items": [
+        {
+            "StatName": "Speed",
+            "Level": 1
+        },
+        {
+            "StatName": "Max_hp",
+            "Level": 2
+        },
+        {
+            "StatName": "Regeneration",
+            "Level": 6
+        },
+        {
+            "StatName": "Armor",
+            "Level": 7
+        },
+        {
+            "StatName": "Strength",
+            "Level": 4
+        },
+        {
+            "StatName": "Vampirism",
+            "Level": 5
+        },
+        {
+            "StatName": "Crits",
+            "Level": 2
+        }
+    ]
+}
