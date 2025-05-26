@@ -108,16 +108,21 @@ Git
 A code editor (e.g., Visual Studio, Rider)
 
 ⚙️ Installation & Setup
+
+
 1️⃣ Clone the Repository
 bash
 git clone https://github.com/D1ff1337/RvO_IS-44.git
 cd RvO_IS-44
+
+
 2️⃣ Open the Project in Unity
 Launch Unity Hub.
 
 Click Open → Add Project from Disk and select the cloned RvO_IS-44 folder.
 
 Wait for Unity to load dependencies (may take a few minutes).
+
 
 3️⃣ Resolve Missing Packages (If Needed)
 Open Window > Package Manager.
