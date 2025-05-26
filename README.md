@@ -107,3 +107,76 @@ RvO_IS-44/
 ├── Builds/            # Compiled PC/Android versions  
 ├── Docs/              # Design documents (if any)  
 └── README.md          # This file  
+
+🚀 Getting Started
+Follow these instructions to set up and run the project in Unity.
+
+📋 Prerequisites
+Unity Hub (2021.3 LTS or later)
+
+Git
+
+A code editor (e.g., Visual Studio, Rider)
+
+⚙️ Installation & Setup
+1️⃣ Clone the Repository
+bash
+git clone https://github.com/D1ff1337/RvO_IS-44.git
+cd RvO_IS-44
+2️⃣ Open the Project in Unity
+Launch Unity Hub.
+
+Click Open → Add Project from Disk and select the cloned RvO_IS-44 folder.
+
+Wait for Unity to load dependencies (may take a few minutes).
+
+3️⃣ Resolve Missing Packages (If Needed)
+Open Window > Package Manager.
+
+Ensure required packages (e.g., UnityEngine.UI) are installed.
+
+🎮 Running the Game
+▶️ Play in Editor
+Open the main scene:
+
+Navigate to Assets/Scenes/Main.unity (or equivalent).
+
+Click the Play (▶️) button in the Unity Editor to test.
+
+📦 Building the Game
+For PC (Windows/macOS)
+Go to File > Build Settings.
+
+Select PC, Mac & Linux Standalone.
+
+Choose your platform (Windows/macOS).
+
+Click Build and select an output folder.
+
+For Android
+Install Android SDK & NDK via Unity Hub.
+
+In Build Settings, switch platform to Android.
+
+Configure Player Settings (Bundle ID, minimum API level).
+
+Click Build to generate an APK.
+
+🔧 Troubleshooting
+Issue	Solution
+Missing Scripts	Go to Assets > Reimport All.
+Unity Version Mismatch	Install the correct version via Unity Hub.
+Build Errors	Check Window > General > Console for details.
+Dependency Issues	Reinstall packages via Package Manager.
+🤝 Contributing
+We welcome contributions!
+
+Fork the repository.
+
+Create a new branch (git checkout -b feature/your-feature).
+
+Commit changes (git commit -m "Add awesome feature").
+
+Push to your fork (git push origin feature/your-feature).
+
+Open a Pull Request.
