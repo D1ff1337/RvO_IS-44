@@ -1,0 +1,39 @@
+{
+    "items": [
+        {
+            "PlayerName": "",
+            "StatName": "Speed",
+            "Level": 22
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Max_hp",
+            "Level": 3
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Regeneration",
+            "Level": 2
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Vampirism",
+            "Level": 5
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Strength",
+            "Level": 3
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Armor",
+            "Level": 3
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Crits",
+            "Level": 4
+        }
+    ]
+}

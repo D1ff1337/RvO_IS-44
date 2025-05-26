@@ -14,7 +14,7 @@ public class AdminPanelController : MonoBehaviour
             return;
         }
 
-        // ⬇️ ДОБАВЬ ЭТО
+      
         player = FindObjectOfType<PlayerController>();
         if (player == null)
         {

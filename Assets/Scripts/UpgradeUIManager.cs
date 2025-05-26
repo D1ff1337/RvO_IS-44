@@ -1,68 +1,118 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class UpgradeUIManager : MonoBehaviour
 {
+    public Text upgradeListText;
+    public InputField playerNameInput;
+    public InputField statNameInput;
+    public InputField levelInput;
     public Button addButton;
+    public Button resetButton;
     public Button showButton;
-    public Button clearButton;
-    public Text upgradesText;
+    public Text errorMessageText;
 
-    private IDataStorage<UpgradeData> storage;
+    private Repository repository;
+    private PlayerStats playerStats;
 
     private void Start()
     {
-        storage = new JsonStorage<UpgradeData>("upgrades.json");
+        playerStats = new PlayerStats("Maxim");
+        repository = FindObjectOfType<Repository>();
 
+        
         addButton.onClick.AddListener(AddUpgrade);
+        resetButton.onClick.AddListener(ResetAllUpgrades);
         showButton.onClick.AddListener(ShowUpgrades);
-        clearButton.onClick.AddListener(ClearUpgrades);
+
+        
+        UpdateUpgradeList();
     }
 
     private void AddUpgrade()
     {
-        string[] statNames = { "Speed", "Armor", "MaxHp", "Strength", "Regeneration", "Vampirism", "Crits" };
-        string randomStat = statNames[Random.Range(0, statNames.Length)];
+        string playerName = playerNameInput.text.Trim();
+        string statName = statNameInput.text.Trim();
+        int level;
 
-        string currentPlayerName = PlayerPrefs.GetString("PlayerName", "DefaultPlayer");
-
-        storage.Add(new UpgradeData
+        
+        if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(statName) || !int.TryParse(levelInput.text, out level))
         {
-            PlayerName = currentPlayerName,
-            StatName = randomStat,
-            Level = Random.Range(1, 10)
-        });
-        storage.Save();
-        Debug.Log($"➕ Додано новий апгрейд для {currentPlayerName}: {randomStat}");
+            errorMessageText.text = "❌ Введіть коректні значення для всіх полів!";
+            return;
+        }
+
+        
+        var upgrade = new UpgradeData(playerName, statName, level);
+        if (!upgrade.IsValid(out string errorMessage))
+        {
+            errorMessageText.text = $"❌ Помилка валідації:\n{errorMessage}";
+            return;
+        }
+
+        
+        if (!repository.PlayerExists(playerName))
+        {
+            errorMessageText.text = $"❌ Гравець '{playerName}' не знайдений!";
+            return;
+        }
+
+        
+        if (!repository.IsStatValid(statName))
+        {
+            errorMessageText.text = $"❌ Стат '{statName}' не знайдений!";
+            return;
+        }
+
+        
+        repository.AddUpgrade(playerName, statName, level);
+        UpdateUpgradeList();
+        errorMessageText.text = "";
+        Debug.Log($"✅ Додано апгрейд: {statName} (Lv.{level}) для {playerName}");
     }
 
-
+    private void ResetAllUpgrades()
+    {
+        repository.ResetAllUpgrades();
+        UpdateUpgradeList();
+        errorMessageText.text = "🧹 Всі апгрейди скинуто!";
+    }
 
     private void ShowUpgrades()
     {
-        string currentPlayerName = PlayerPrefs.GetString("PlayerName", "DefaultPlayer");
+        string playerName = playerNameInput.text.Trim();
 
-        List<UpgradeData> upgrades = storage.GetAll();
-        upgradesText.text = "📋 Прокачки:\n\n";
-
-        foreach (var upg in upgrades)
+        if (string.IsNullOrEmpty(playerName))
         {
-            if (upg.PlayerName == currentPlayerName)
-            {
-                upgradesText.text += $"- {upg.StatName.PadRight(12)} : Lv.{upg.Level}\n";
-            }
+            errorMessageText.text = "❌ Введіть нікнейм гравця!";
+            return;
         }
+
+        if (!repository.PlayerExists(playerName))
+        {
+            errorMessageText.text = $"❌ Гравець '{playerName}' не знайдений!";
+            return;
+        }
+
+        UpdateUpgradeList(playerName);
+        errorMessageText.text = "";
     }
 
-
-
-
-    private void ClearUpgrades()
+    private void UpdateUpgradeList(string playerName = null)
     {
-        (storage as JsonStorage<UpgradeData>).ClearAll();
-        storage.Save();
-        upgradesText.text = "Всі прокачки видалено!";
-        Debug.Log("🧹 Всі прокачки очищено");
+        upgradeListText.text = "";
+        List<UpgradeData> upgrades = repository.GetUpgrades(playerName ?? playerStats.PlayerName);
+
+        if (upgrades.Count == 0)
+        {
+            upgradeListText.text = "❌ Апгрейдів не знайдено!";
+            return;
+        }
+
+        foreach (var upgrade in upgrades)
+        {
+            upgradeListText.text += $"{upgrade.StatName} (Lv.{upgrade.Level})\n";
+        }
     }
 }

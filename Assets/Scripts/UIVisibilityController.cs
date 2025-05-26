@@ -2,7 +2,7 @@
 
 public class UIVisibilityController : MonoBehaviour
 {
-    public CanvasGroup uiGroup;  // <<< Ось це поле має бути ПУБЛІЧНИМ
+    public CanvasGroup uiGroup;  
 
     public KeyCode toggleKey = KeyCode.Tab;
     public float fadeSpeed = 5f;
@@ -16,7 +16,7 @@ public class UIVisibilityController : MonoBehaviour
             Debug.LogError("❌ CanvasGroup не призначено!");
         }
 
-        HideInstantly(); // Почати схованим
+        HideInstantly(); 
     }
 
     private void Update()

@@ -1,0 +1,69 @@
+{
+    "items": [
+        {
+            "PlayerName": "",
+            "StatName": "Speed",
+            "Level": 6
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Max_hp",
+            "Level": 3
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Regeneration",
+            "Level": 14
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Armor",
+            "Level": 10
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Vampirism",
+            "Level": 15
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Strength",
+            "Level": 3
+        },
+        {
+            "PlayerName": "",
+            "StatName": "Crits",
+            "Level": 2
+        },
+        {
+            "PlayerName": "Maxim",
+            "StatName": "Speed",
+            "Level": 3
+        },
+        {
+            "PlayerName": "Maxim",
+            "StatName": "Armor",
+            "Level": 2
+        },
+        {
+            "PlayerName": "Maxim",
+            "StatName": "Strength",
+            "Level": 4
+        },
+        {
+            "PlayerName": "Maxim",
+            "StatName": "Speed",
+            "Level": 3
+        },
+        {
+            "PlayerName": "Maxim",
+            "StatName": "Armor",
+            "Level": 2
+        },
+        {
+            "PlayerName": "Maxim",
+            "StatName": "Strength",
+            "Level": 4
+        }
+    ]
+}

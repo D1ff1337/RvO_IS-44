@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -10,30 +11,68 @@ public class JsonStorage<T> : IDataStorage<T> where T : class
 
     public JsonStorage(string fileName)
     {
-        filePath = Path.Combine(Path.GetDirectoryName(Application.dataPath), fileName);
+        // Збереження файлів у кореневій папці проєкту
+        filePath = Path.Combine(Application.persistentDataPath, fileName);
         Load();
     }
-
 
     private void Load()
     {
         if (File.Exists(filePath))
         {
-            string json = File.ReadAllText(filePath);
-            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
-            if (wrapper != null && wrapper.items != null)
-                items = wrapper.items;
+            try
+            {
+                string json = File.ReadAllText(filePath);
+                Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
+                if (wrapper != null && wrapper.Items != null)
+                {
+                    items = wrapper.Items;
+                    Debug.Log($"📂 Завантажено {items.Count} елементів з файлу: {filePath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"❌ Помилка завантаження файлу: {filePath}\n{ex.Message}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"⚠️ Файл не знайдено: {filePath}");
         }
     }
 
     public void Add(T entity)
     {
+        if (entity == null)
+        {
+            Debug.LogError("❌ Неможливо додати порожній об'єкт!");
+            return;
+        }
+
         items.Add(entity);
+        Save();
     }
 
     public void Update(T entity)
     {
-        Save(); // На лабу достаточно просто пересохранить весь список
+        if (entity == null)
+        {
+            Debug.LogError("❌ Неможливо оновити порожній об'єкт!");
+            return;
+        }
+
+        int id = GetId(entity);
+        var existingItem = items.FirstOrDefault(e => GetId(e) == id);
+        if (existingItem != null)
+        {
+            int index = items.IndexOf(existingItem);
+            items[index] = entity;
+            Save();
+        }
+        else
+        {
+            Debug.LogWarning($"⚠️ Об'єкт з ID {id} не знайдено!");
+        }
     }
 
     public void Delete(int id)
@@ -43,6 +82,11 @@ public class JsonStorage<T> : IDataStorage<T> where T : class
         {
             items.Remove(item);
             Save();
+            Debug.Log($"🗑️ Видалено об'єкт з ID {id}");
+        }
+        else
+        {
+            Debug.LogWarning($"⚠️ Об'єкт з ID {id} не знайдено!");
         }
     }
 
@@ -58,36 +102,43 @@ public class JsonStorage<T> : IDataStorage<T> where T : class
 
     public void Save()
     {
-        Wrapper<T> wrapper = new Wrapper<T> { items = items };
-        string json = JsonUtility.ToJson(wrapper, true);
-        File.WriteAllText(filePath, json);
-        Debug.Log($"💾 Данные сохранены в файл: {filePath}");
+        try
+        {
+            Wrapper<T> wrapper = new Wrapper<T> { Items = items };
+            string json = JsonUtility.ToJson(wrapper, true);
+            File.WriteAllText(filePath, json);
+            Debug.Log($"💾 Дані збережено у файл: {filePath}");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"❌ Помилка збереження файлу: {filePath}\n{ex.Message}");
+        }
     }
 
-    // ===== ВАЖНО: получение Id из объекта =====
     private int GetId(T entity)
     {
-        var idField = entity.GetType().GetField("Id");
-        if (idField != null)
+        var idProperty = entity.GetType().GetProperty("Id");
+        if (idProperty != null)
         {
-            return (int)idField.GetValue(entity);
+            return (int)idProperty.GetValue(entity);
         }
         else
         {
-            Debug.LogError("❌ У объекта нет поля 'Id'!");
+            Debug.LogError("❌ У об'єкта немає поля 'Id'!");
             return -1;
         }
-    }
-
-    [System.Serializable]
-    private class Wrapper<U>
-    {
-        public List<U> items;
     }
 
     public void ClearAll()
     {
         items.Clear();
+        Save();
+        Debug.Log($"🗑️ Усі дані очищено у файлі: {filePath}");
     }
 
+    [Serializable]
+    private class Wrapper<U>
+    {
+        public List<U> Items;
+    }
 }

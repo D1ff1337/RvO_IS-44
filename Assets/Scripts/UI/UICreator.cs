@@ -24,7 +24,7 @@ public class UICreator : MonoBehaviour
         canvasGO.AddComponent<CanvasScaler>();
         canvasGO.AddComponent<GraphicRaycaster>();
 
-        // Щоб UI працював
+        
         if (FindObjectOfType<UnityEngine.EventSystems.EventSystem>() == null)
         {
             GameObject eventSystem = new GameObject("EventSystem");
@@ -40,14 +40,14 @@ public class UICreator : MonoBehaviour
 
         Button button = buttonGO.AddComponent<Button>();
         Image image = buttonGO.AddComponent<Image>();
-        image.color = Color.white; // Колір кнопки
+        image.color = Color.white; 
 
         RectTransform rt = buttonGO.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(200, 50);
         rt.anchoredPosition = position;
         rt.localScale = Vector3.one;
 
-        // Створюємо текст на кнопці
+        
         GameObject textGO = new GameObject("Text");
         textGO.transform.SetParent(buttonGO.transform);
         Text buttonText = textGO.AddComponent<Text>();
@@ -64,7 +64,7 @@ public class UICreator : MonoBehaviour
 
         button.onClick.AddListener(onClickAction);
 
-        // Зберігаємо посилання якщо треба
+       
         if (text.Contains("Add"))
             addButton = button;
         else if (text.Contains("Show"))
