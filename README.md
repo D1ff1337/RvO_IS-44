@@ -97,17 +97,6 @@ Defend your throne as **Vasiliy the Robot** against endless ogre hordes! Use com
 
 ---
 
-## 📂 Repository Structure  
-```plaintext
-RvO_IS-44/  
-├── Assets/  
-│   ├── Scripts/       # C# game logic  
-│   ├── Sprites/       # Character & environment art  
-│   └── Audio/         # Sound effects & music  
-├── Builds/            # Compiled PC/Android versions  
-├── Docs/              # Design documents (if any)  
-└── README.md          # This file  
-
 🚀 Getting Started
 Follow these instructions to set up and run the project in Unity.
 
@@ -180,3 +169,18 @@ Commit changes (git commit -m "Add awesome feature").
 Push to your fork (git push origin feature/your-feature).
 
 Open a Pull Request.
+
+
+## 📂 Repository Structure  
+```plaintext
+RvO_IS-44/  
+├── Assets/  
+│   ├── Scripts/       # C# game logic  
+│   ├── Sprites/       # Character & environment art  
+│   └── Audio/         # Sound effects & music  
+├── Builds/            # Compiled PC/Android versions  
+├── Docs/              # Design documents (if any)  
+└── README.md          # This file  
+
+
+
